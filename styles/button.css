@@ -1,0 +1,108 @@
+.button {
+  color: #1670f0;
+  border: none;
+  border-radius: 35px;
+  padding: 15px 30px;
+  letter-spacing: 2px;
+  font-size: 26pt;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, .5);
+  overflow: hidden;
+  transition: all .2s ease-out;
+}
+
+.button:hover {
+  cursor: pointer;
+  background: #1670f0;
+  color: white;
+}
+
+.button:active {
+  background: #1353ac;
+}
+
+.button .top, .button .right, .button .bottom, .button .left {
+  position: absolute;
+}
+
+.button .top, .button .bottom {
+  height: 2px;
+  width: 100%;
+}
+
+.button .left, .button .right {
+  height: 100%;
+  width: 2px;
+}
+
+.button .top, .button .right {
+  top: 0;
+}
+
+.button .bottom, .button .left {
+  left: 0;
+  bottom: 0;
+}
+
+.button .top {
+  left: 0;
+  background: linear-gradient(to right, #0c002b, #1779ff);
+  animation: animateTop 2s linear infinite;
+}
+
+@keyframes animateTop {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.button .right {
+  right: 0;
+  background: linear-gradient(to bottom, #0c002b, #1779ff);
+  transform: translateY(-100%);
+  animation: animateRight 2s linear infinite;
+  animation-delay: 1s;
+}
+
+@keyframes animateRight {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.button .bottom {
+  background: linear-gradient(to left, #0c002b, #1779ff);
+  animation: animateBottom 2s linear infinite;
+}
+
+@keyframes animateBottom {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.button .left {
+  background: linear-gradient(to top, #0c002b, #1779ff);
+  transform: translateY(100%);
+  animation: animateLeft 2s linear infinite;
+  animation-delay: 1s;
+}
+
+@keyframes animateLeft {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}

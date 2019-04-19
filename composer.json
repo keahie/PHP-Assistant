@@ -1,0 +1,17 @@
+{
+    "name": "keaie/assistant",
+    "description": "A german personal assistant",
+    "type": "project",
+    "require": {
+        "google/cloud-text-to-speech": "^0.4.0"
+    },
+    "require-dev": {
+        "google/cloud-text-to-speech": "^0.4.0"
+    },
+    "authors": [
+        {
+            "name": "Keanu Hie",
+            "email": "hie.keanu@gmail.com"
+        }
+    ]
+}
