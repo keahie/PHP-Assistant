@@ -14,7 +14,11 @@ const recordVoice = () => {
     })
 
     mediaRecorder.addEventListener('stop', () => {
-      const audioBlob = new Blob(audioChunks)
+      const audioBlob = new Blob(audioChunks, { 'type' : 'audio/wav; codecs=MS_PCM' })
+      let editBlob = audioBlob
+      editBlob.lastModifiedDate = new Date()
+      editBlob.name = 'recording'
+      download(audioChunks, 'recording.wav', { 'type' : 'audio/wav; codecs=0' })
       const audioUrl = URL.createObjectURL(audioBlob)
       const audio = new Audio(audioUrl)
       audio.play()
@@ -28,11 +32,26 @@ const recordVoice = () => {
   })
 }
 
-const sendSpeak = () => {
-  let xhr = new XMLHttpRequest()
-  let message = document.getElementById('message').value
+const download = (data, filename, type) => {
+  var file = new Blob([data], {type: type});
+  if (window.navigator.msSaveOrOpenBlob) // IE10+
+      window.navigator.msSaveOrOpenBlob(file, filename);
+  else { // Others
+      var a = document.createElement("a"),
+              url = URL.createObjectURL(file);
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function() {
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);  
+      }, 0); 
+  }
+}
 
-  console.log('message', message)
+const sendSpeak = (message) => {
+  let xhr = new XMLHttpRequest()
 
   xhr.open('POST', 'php/speak.php')
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')

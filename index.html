@@ -13,12 +13,13 @@
 <body>
   <div class="form">
     <input type="text" class="textfield" name="message" id="message">
-    <a href="#" class="button" onclick="sendSpeak()">Sprechen</a>
-    <a id="recording" class="button" href="#" onclick="recordVoice()">Aufnehmen</a>
+    <a href="#" class="button" onclick="sendSpeak(document.getElementById('message').value)">Sprechen</a>
+    <a id="recording" class="button" href="#" onclick="recognition.start()">Aufnehmen</a>
   </div>
   <div id="recordings"></div>
   <iframe name="hiddenFrame" width="0" height="0" frameborder="0" style="display: none;"></iframe>
   <script src="javascript/requester.js"></script>
+  <script src="javascript/recorder.js"></script>
 </body>
 
 </html>
