@@ -12,7 +12,7 @@ class ModuleHello extends Module
 
     function getResponse($input)
     {
-        global $assistantName;
-        return 'Ich heiße ' . $assistantName;
+        global $assistant_name;
+        return 'Ich heiße ' . $assistant_name;
     }
 } 

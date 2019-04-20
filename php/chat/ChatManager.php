@@ -13,32 +13,36 @@ class ChatManager
     {
         foreach ($this->modules as $module) {
             foreach ($module->trigger as $element) {
-                if (is_array($element)) {
-                    $containsAllWords = true;
-                    foreach ($element as $string) {
-                        if (!str_contains($string, $input))
-                        {
-                            $containsAllWords = false;
-                            break;
-                        }
-                    }
-                    if ($containsAllWords)
-                    {
-                        $input = explode(' ', $input);
-                        return $module->getResponse($input);
-                    }
+                if ($this->validate_words($element, $input)) {
+                    $validInput = explode(' ', $input);
+                    return $module->getResponse($validInput);
                 }
             }
         }
         return 'Tut mir leid. Das habe ich leider nicht verstanden.';
     }
 
-    function init() {
+    private function validate_words($array, $input)
+    {
+        $valid = true;
+        foreach ($array as $element) {
+            if (is_array($element)) {
+                $valid = $this->validate_words($element, $input);
+            } elseif (!str_contains($element, $input)) {
+                $valid = false;
+                break;
+            }
+        }
+        return $valid;
+    }
+
+    function init()
+    {
         foreach (scandir(dirname('chat/modules/modules')) as $filename) {
             $path = dirname('chat/modules/modules') . '/' . $filename;
             if (is_file($path)) {
                 require $path;
-                $className = preg_replace("/[^a-zA-Z]/", "", basename($path, '.php').PHP_EOL);
+                $className = preg_replace("/[^a-zA-Z]/", "", basename($path, '.php') . PHP_EOL);
                 array_push($this->modules, new $className());
             }
         }

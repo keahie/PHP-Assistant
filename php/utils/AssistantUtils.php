@@ -1,3 +1,2 @@
 <?php
-
-$assistantName = "Helene";
+$assistant_name = "Helene";
