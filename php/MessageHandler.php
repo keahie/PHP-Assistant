@@ -3,6 +3,7 @@ require_once('TextToSpeech.php');
 require_once('chat/ChatManager.php');
 require_once('utils/StringUtils.php');
 require_once('utils/AssistantUtils.php');
+require_once('utils/DateUtils.php');
 
 $textTranslator = new TextToSpeech();
 
